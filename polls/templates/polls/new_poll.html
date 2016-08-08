@@ -4,7 +4,10 @@
     <h1>New poll</h1>
     <form method="POST" class="new-poll-form">
         {% csrf_token %}
-        {{ form.as_p }}
+         <label for="{{ form.drink.index }}">Выберете напиток, который бы вы предпочли:</label><br/>
+        {{ form.drink }}
+         <label for="{{ form.presence.index }}">Вы придете на вечеринку?:</label><br/>
+        {{ form.presence }}
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
 {% endblock %}
