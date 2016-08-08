@@ -26,7 +26,7 @@ class vk_social():
             try:
                 vk_user_json = vk_user_obj.json()['response'][0]
             except:
-                return None
+                return 'err 1'
 
             # need to be random
             value1 = time.time()
@@ -58,8 +58,8 @@ class vk_social():
                 user_social_profile.social_photo_url = vk_user_json['photo_100']
                 user_social_profile.save()
 
-                return True;
+                return 'ok';
            # except:
             #    return None;
         else:
-            return None;
+            return 'err 2';
