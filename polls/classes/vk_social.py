@@ -15,15 +15,11 @@ class vk_social():
         # VK authentication is OK
         if vk_auth_response.status_code == 200:
             self.vk_auth_json = vk_auth_response.json()
-            self.test = vk_auth_response.text
         else:
             self.vk_auth_json = None
-            self.vk_auth_json = '-'
 
-    def register_and_login_user(self):
+    def register_and_login_user(self, request):
         if self.vk_auth_json:
-            return self.test
-            '''
             user_request_post_data = {'user_ids': self.vk_auth_json['user_id'], 'fields': 'photo_100'}
             vk_user_obj = requests.post('https://api.vk.com/method/users.get', data=user_request_post_data)
 
@@ -40,28 +36,30 @@ class vk_social():
 
             vk_social_type = SocialTypes.objects.get(name='vk.com')
 
-            existing_profile = UserSocialProfile.objects.filter(social_type=vk_social_type,
-                                                                social_id=vk_user_json['uid'])
+            try:
+                existing_profile = UserSocialProfile.objects.filter(social_type=vk_social_type,
+                                                                    social_id=vk_user_json['uid'])
 
-            if (existing_profile):
-                user = User.objects.get(usersocialprofile=existing_profile)
-                user.backend = 'django.contrib.auth.backends.ModelBackend'
-                login(request, user)
-            else:
-                user = User.objects.create_user(code[-20:])
-                user.save()
-                user.backend = 'django.contrib.auth.backends.ModelBackend'
-                login(request, user)
+                if (existing_profile):
+                    user = User.objects.get(usersocialprofile=existing_profile)
+                    user.backend = 'django.contrib.auth.backends.ModelBackend'
+                    login(request, user)
+                else:
+                    user = User.objects.create_user(code[-20:])
+                    user.save()
+                    user.backend = 'django.contrib.auth.backends.ModelBackend'
+                    login(request, user)
 
-                user_social_profile = UserSocialProfile.objects.create(
-                        user = request.user, social_type = vk_social_type, social_id = vk_user_json['uid']
-                    )
-                user_social_profile.social_first_name = vk_user_json['first_name']
-                user_social_profile.social_last_name = vk_user_json['last_name']
-                user_social_profile.social_photo_url = vk_user_json['photo_100']
-                user_social_profile.save()
+                    user_social_profile = UserSocialProfile.objects.create(
+                            user = request.user, social_type = vk_social_type, social_id = vk_user_json['uid']
+                        )
+                    user_social_profile.social_first_name = vk_user_json['first_name']
+                    user_social_profile.social_last_name = vk_user_json['last_name']
+                    user_social_profile.social_photo_url = vk_user_json['photo_100']
+                    user_social_profile.save()
 
-                return HttpResponse('user registration')
-'''
+                    return True;
+            except:
+                return None;
         else:
             return None;
