@@ -5,7 +5,6 @@ from django.conf import settings
 from django.core.mail import send_mail
 from .forms import PollForm
 from .models import Poll
-from django.contrib.auth.decorators import login_required
 
 
 def login_page(request):
@@ -27,26 +26,27 @@ def vk_handler(request):
     else:
         return redirect('polls.views.login_page')
 
-@login_required
 def new_poll(request):
-    #send_mail('New', 'Hey test test', settings.EMAIL_HOST_USER, ['party.maker.adm@yandex.ru'])
-    if request.method == "POST":
-        form = PollForm(request.POST)
-        if form.is_valid():
-            poll = form.save(commit=False)
-            poll.user = request.user
-            poll.save()
-            # !!! THANK u form
-            return redirect('/')
+    if request.user.is_authenticated():
+        #send_mail('New', 'Hey test test', settings.EMAIL_HOST_USER, ['party.maker.adm@yandex.ru'])
+        if request.method == "POST":
+            form = PollForm(request.POST)
+            if form.is_valid():
+                poll = form.save(commit=False)
+                poll.user = request.user
+                poll.save()
+                # !!! THANK u form
+                return redirect('/')
+        else:
+            #find previous!!!!
+            form = PollForm()
+        return render(request, 'polls/new_poll.html', {'form': form})
     else:
-        #find previous!!!!
-        form = PollForm()
-    return render(request, 'polls/new_poll.html', {'form': form})
+        return redirect('polls.views.login_page')
 
-@login_required
 def polls_list(request):
     if request.user.is_superuser:
         polls = Poll.objects.order_by('user')
-        return render(request, 'polls/polls_list.html', {'polls' : polls})
+        return render(request, 'polls/polls_list.html', {'polls': polls})
     else:
         return redirect('polls.views.new_poll')
