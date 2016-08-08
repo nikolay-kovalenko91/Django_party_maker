@@ -12,4 +12,4 @@ def vk_handler(request):
         vk_auth_code = request.GET['code']
         return HttpResponse(vk_social(vk_auth_code).register_and_login_user())
     else:
-        redirect('polls.views.login_page')
+        redirect('.polls.views.login_page')
