@@ -134,5 +134,5 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # vk.com app settings
 VK_CLIENT_ID = '5576969'
-VK_REDIRECT_URL = 'https://infinite-lake-31577.herokuapp.com/vk'
+VK_REDIRECT_URL = 'https://infinite-lake-31577.herokuapp.com/vk_auth'
 VK_CLIENT_SECRET = 'rSHEa0jbSZzg1596wgyJ'
