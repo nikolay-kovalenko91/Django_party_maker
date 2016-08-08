@@ -26,7 +26,7 @@ class vk_social():
             try:
                 vk_user_json = vk_user_obj.json()['response'][0]
             except:
-                return 'err 1'
+                return None
 
             # need to be random
             value1 = time.time()
@@ -36,30 +36,30 @@ class vk_social():
 
             vk_social_type = SocialTypes.objects.get(name='vk.com')
 
-            #try:
-            existing_profile = UserSocialProfile.objects.filter(social_type=vk_social_type,
-                                                                social_id=vk_user_json['uid'])
+            try:
+                existing_profile = UserSocialProfile.objects.filter(social_type=vk_social_type,
+                                                                    social_id=vk_user_json['uid'])
 
-            if (existing_profile):
-                user = User.objects.get(usersocialprofile=existing_profile)
-                user.backend = 'django.contrib.auth.backends.ModelBackend'
-                login(request, user)
-            else:
-                user = User.objects.create_user(code[-20:])
-                user.save()
-                user.backend = 'django.contrib.auth.backends.ModelBackend'
-                login(request, user)
+                if (existing_profile):
+                    user = User.objects.get(usersocialprofile=existing_profile)
+                    user.backend = 'django.contrib.auth.backends.ModelBackend'
+                    login(request, user)
+                else:
+                    user = User.objects.create_user(code[-20:])
+                    user.save()
+                    user.backend = 'django.contrib.auth.backends.ModelBackend'
+                    login(request, user)
 
-                user_social_profile = UserSocialProfile.objects.create(
-                        user = request.user, social_type = vk_social_type, social_id = vk_user_json['uid']
-                    )
-                user_social_profile.social_first_name = vk_user_json['first_name']
-                user_social_profile.social_last_name = vk_user_json['last_name']
-                user_social_profile.social_photo_url = vk_user_json['photo_100']
-                user_social_profile.save()
+                    user_social_profile = UserSocialProfile.objects.create(
+                            user = request.user, social_type = vk_social_type, social_id = vk_user_json['uid']
+                        )
+                    user_social_profile.social_first_name = vk_user_json['first_name']
+                    user_social_profile.social_last_name = vk_user_json['last_name']
+                    user_social_profile.social_photo_url = vk_user_json['photo_100']
+                    user_social_profile.save()
 
-                return 'ok';
-           # except:
-            #    return None;
+                return True;
+            except:
+                return None;
         else:
-            return 'err 2';
+            return None;
