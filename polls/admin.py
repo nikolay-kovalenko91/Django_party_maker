@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import SocialTypes, UserSocialProfile
 
-# Register your models here.
+admin.site.register(SocialTypes)
+admin.site.register(UserSocialProfile)
