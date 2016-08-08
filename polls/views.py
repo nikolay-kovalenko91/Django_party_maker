@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .classes.vk_social import vk_social
 from django.http import HttpResponse
 from django.conf import settings
@@ -7,4 +7,9 @@ def login_page(request):
     return render(request, 'index.html', {'client_id': settings.VK_CLIENT_ID, 'redirect_url': settings.VK_REDIRECT_URL})
 
 def vk_handler(request):
-    return HttpResponse(vk_social())
+    if request.method == "GET" and 'code' in request.GET:
+        # CLASS =  init
+        vk_auth_code = request.GET['code']
+        return HttpResponse(vk_social.register_and_login_user(vk_auth_code))
+    else:
+        redirect('polls.views.login_page')
