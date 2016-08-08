@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Polls Lists</h1>
+    {% for poll in polls %}
+        {{ poll.author }}<br/>
+        {{ poll.drink }}<br/>
+        {{ poll.presence }}<br/>
+    {% endfor %}
+{% endblock %}

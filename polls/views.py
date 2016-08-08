@@ -2,16 +2,51 @@ from django.shortcuts import render, redirect
 from .classes.vk_social import vk_social
 from django.http import HttpResponse
 from django.conf import settings
+from django.core.mail import send_mail
+from .forms import PollForm
+from .models import Poll
+from django.contrib.auth.decorators import login_required
+
 
 def login_page(request):
-    return render(request, 'index.html', {'client_id': settings.VK_CLIENT_ID, 'redirect_url': settings.VK_REDIRECT_URL})
+    return render(request, 'auth/login_page.html', {'client_id': settings.VK_CLIENT_ID, 'redirect_url': settings.VK_REDIRECT_URL})
 
 def vk_handler(request):
     if request.method == "GET" and 'code' in request.GET:
         # CLASS =  init
         vk_auth_code = request.GET['code']
-        vk_auth_result = vk_social(vk_auth_code).register_and_login_user(request)
+        vk_user_obj = vk_social(vk_auth_code)
+        vk_auth_result = vk_user_obj.register_and_login_user(request)
+
         if vk_auth_result:
-            return HttpResponse(request.user.username)
+            # !!!!!!!!!
+            return redirect('polls.views.new_poll')
+        else:
+            # auth error !!!!
+            return redirect('polls.views.login_page')
     else:
         return redirect('polls.views.login_page')
+
+@login_required
+def new_poll(request):
+    #send_mail('New', 'Hey test test', settings.EMAIL_HOST_USER, ['party.maker.adm@yandex.ru'])
+    if request.method == "POST":
+        form = PollForm(request.POST)
+        if form.is_valid():
+            poll = form.save(commit=False)
+            poll.user = request.user
+            poll.save()
+            # !!! THANK u form
+            return redirect('/')
+    else:
+        #find previous!!!!
+        form = PollForm()
+    return render(request, 'polls/new_poll.html', {'form': form})
+
+@login_required
+def polls_list(request):
+    if request.user.is_superuser:
+        polls = Poll.objects.order_by('user')
+        return render(request, 'polls/polls_list.html', {'polls' : polls})
+    else:
+        return redirect('polls.views.new_poll')
