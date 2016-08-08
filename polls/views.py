@@ -11,9 +11,7 @@ def vk_handler(request):
         # CLASS =  init
         vk_auth_code = request.GET['code']
         vk_auth_result = vk_social(vk_auth_code).register_and_login_user(request)
-        if vk_auth_result == 'ok':
-            return HttpResponse(request.user.username)
-        else:
-            return HttpResponse(vk_auth_result)
+        if vk_auth_result:
+            return HttpResponse(vk_social(vk_auth_code).register_and_login_user(request))
     else:
         return redirect('polls.views.login_page')
