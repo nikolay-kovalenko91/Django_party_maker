@@ -10,3 +10,7 @@ body {
 .error input, .error select {
     border: 2px red solid;
 }
+
+.error {
+    border: 3px red solid;
+}

@@ -6,7 +6,6 @@ from django.conf import settings
 from django.core.mail import send_mail
 from .forms import PollForm
 from .models import Poll, UserSocialProfile, User
-from django.http import Http404
 
 def login_page(request):
     return render(request, 'auth/login_page.html', {'client_id': settings.VK_CLIENT_ID, 'redirect_url': settings.VK_REDIRECT_URL})
@@ -20,7 +19,7 @@ def vk_handler(request):
 
         if vk_auth_result:
             # !!!!!!!!!
-            polls_help_obj = polls_help();
+            polls_help_obj = polls_help()
 
             if polls_help_obj.is_party_manager(request):
                 return redirect('polls.views.polls_list')
@@ -50,19 +49,20 @@ def new_poll(request):
                 if 'drink' not in request.POST:
                     msg = ""
                     form.add_error('drink', msg)
-                polls_help_obj = polls_help();
-                new_poll_params = polls_help_obj.arrange_poll_form(request)
+                polls_help_obj = polls_help()
+                new_poll_params = polls_help_obj.arrange_poll_form(request, form)
                 return render(request, 'polls/new_poll.html', new_poll_params)
         else:
             #find previous
-            polls_help_obj = polls_help();
-            new_poll_params = polls_help_obj.arrange_poll_form(request)
+            form = PollForm()
+            polls_help_obj = polls_help()
+            new_poll_params = polls_help_obj.arrange_poll_form(request, form)
             return render(request, 'polls/new_poll.html', new_poll_params)
     else:
         return redirect('polls.views.login_page')
 
 def polls_list(request):
-    polls_help_obj = polls_help();
+    polls_help_obj = polls_help()
 
     if polls_help_obj.is_party_manager(request):
         polls = Poll.objects.order_by('user')
