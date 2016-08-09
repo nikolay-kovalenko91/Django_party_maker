@@ -3,11 +3,11 @@
 {% block content %}
     <h1>Polls Lists</h1>
     {% for user in users %}
-      {{ user.username }}<br/>
-      {{ user.social_id }}<br/>
-      {{ user.usersocialprofile_set }}<br/>
-        {{ user.usersocialprofile.social_id }}<br/>
-         {{ user.UserSocialProfile.social_id }}<br/>
+      {{ user.username }} username<br/>
+      {{ user.social_id }} social_id<br/>
+      {{ user.usersocialprofile_set }} usersocialprofile_set<br/>
+        {{ user.usersocialprofile.social_id }} usersocialprofile.social_id<br/>
+         {{ user.UserSocialProfile.social_id }} UserSocialProfile.social_id<br/>
       <img src="" />
     {% endfor %}
 {% endblock %}
