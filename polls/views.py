@@ -85,7 +85,7 @@ def new_poll(request):
             polls = Poll.objects.filter(user=user)
 
             if polls:
-                return render(request, 'polls/confirm_change_poll.html')
+                return render(request, 'polls/confirm_change_poll.html', {})
             else:
                 form = PollForm()
                 polls_help_obj = polls_help()
@@ -113,7 +113,7 @@ def vote_end(request):
             return redirect('polls.views.polls_list')
         else:
             logout(request)
-            return render(request, 'polls/vote_end.html')
+            return render(request, 'polls/vote_end.html', {})
 
     else:
         return redirect('polls.views.login_page')
