@@ -23,12 +23,15 @@ body {
     width: 80%;
     opacity: 0.7;
     filter: alpha(Opacity=70);
-    z-index: 100;
 }
 
 .content {
-    z-index: 200;
     padding: 30px;
+    opacity: 1;
+}
+
+.on-center{
+    margin: 0 auto;
 }
 
 a {
