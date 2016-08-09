@@ -44,10 +44,10 @@ def new_poll(request):
                 return redirect('/')
             else:
                 if 'presence' not in request.POST:
-                    msg = ""
+                    msg = "bn"
                     form.add_error('presence', msg)
                 if 'drink' not in request.POST:
-                    msg = ""
+                    msg = "nbj"
                     form.add_error('drink', msg)
                 polls_help_obj = polls_help()
                 new_poll_params = polls_help_obj.arrange_poll_form(request, form)
