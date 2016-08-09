@@ -53,7 +53,7 @@ a {
     background: #337ab7;
   }
 a:hover {
-    box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Ð¢ÐµÐ½ÑŒ */
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
     background: #2e6da4;
    }
 
@@ -68,7 +68,7 @@ a:hover {
 	width: 120px;
 }
 .submit:hover {
-	box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Ð¢ÐµÐ½ÑŒ */
+	box-shadow: 0 0 5px rgba(0,0,0,0.3);
     background: #2e6da4;
 }
 .submit:active {
