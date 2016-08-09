@@ -93,7 +93,7 @@ def confirm_change_poll(request):
                 return render(request, 'polls/vote_end.html')
                 '''
             else:
-                return HttpResponse(request.POST['next_choice'])
+                return HttpResponse('next_choice err')
                 # return redirect('polls.views.new_poll')
     else:
         return render(request, 'polls/confirm_change_poll.html', {})
