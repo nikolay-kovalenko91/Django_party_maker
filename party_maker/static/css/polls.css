@@ -66,3 +66,7 @@ a:hover, .submit:hover {
 	margin-bottom: -1px;
 	zoom: 1;
 }
+
+.form {
+    margin-top: 30px;
+}

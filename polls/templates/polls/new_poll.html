@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>Здравствуйте, {{ vk_social_user.social_first_name }}!</h1>
-    <form method="POST" class="new-poll-form">
+    <form method="POST" class="new-poll-form form">
         {% csrf_token %}
         <label for="{{ form.presence.index }}">Вы придете на вечеринку?</label>
         <div {% if form.presence.errors %}class="error"{% endif %}>
