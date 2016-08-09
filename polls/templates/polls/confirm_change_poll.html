@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Ранее вы уже голосовали, удалить старый ответ и голосовать заново?</h1>
+    <h3>Ранее вы уже голосовали, удалить старый ответ и голосовать заново?</h3>
      <form method="POST" class="next_choice-form form">
         {% csrf_token %}
         <input type="submit" class="submit" name="next_choice" value="Да">
