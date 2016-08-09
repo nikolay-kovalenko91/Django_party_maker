@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .classes.vk_social import vk_social
 from django.http import HttpResponse
 from django.conf import settings
@@ -41,7 +41,7 @@ def new_poll(request):
             #find previous!!!!
             form = PollForm()
             user = request.user
-            social_user = UserSocialProfile.objects.filter(user=user)
+            social_user = get_object_or_404(UserSocialProfile, user=user)
         return render(request, 'polls/new_poll.html', {'form': form, 'social_user': social_user})
     else:
         return redirect('polls.views.login_page')
