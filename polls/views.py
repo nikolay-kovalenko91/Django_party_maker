@@ -47,11 +47,9 @@ def new_poll(request):
                 if request.POST['presence'] == '':
                     msg = "bn"
                     form.add_error('presence', msg)
-                    return HttpResponse('presence')
                 if request.POST['drink'] == '':
                     msg = "nbj"
                     form.add_error('drink', msg)
-                    return HttpResponse('drink')
                 polls_help_obj = polls_help()
                 new_poll_params = polls_help_obj.arrange_poll_form(request, form)
                 return render(request, 'polls/new_poll.html', new_poll_params)
