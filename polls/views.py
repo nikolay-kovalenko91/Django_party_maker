@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from .forms import PollForm
 from .models import Poll, UserSocialProfile, User
+from django.http import HttpResponse
 
 def login_page(request):
     return render(request, 'auth/login_page.html', {'client_id': settings.VK_CLIENT_ID, 'redirect_url': settings.VK_REDIRECT_URL})
@@ -46,9 +47,11 @@ def new_poll(request):
                 if request.POST['presence'] is None:
                     msg = "bn"
                     form.add_error('presence', msg)
+                    return HttpResponse('presence')
                 if request.POST['drink'] == None:
                     msg = "nbj"
                     form.add_error('drink', msg)
+                    return HttpResponse('drink')
                 polls_help_obj = polls_help()
                 new_poll_params = polls_help_obj.arrange_poll_form(request, form)
                 return render(request, 'polls/new_poll.html', new_poll_params)
