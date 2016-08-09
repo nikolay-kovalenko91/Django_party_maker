@@ -10,6 +10,23 @@ body {
     -o-background-size: 100%;
     background-size: 100%;
     font: 100%/1.5em "Myriad Pro", "PT Sans", Verdana, Arial, sans-serif;
+    color: #fff;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+h1 {
+    font-size: 250%;
+}
+
+h2 {
+    font-size: 200%;
+}
+
+h3 {
+    font-size: 150%;
 }
 
 .error input, .error select {
@@ -17,14 +34,11 @@ body {
 }
 
 .wrapper {
-    background: rgba(90, 90, 90, 0.7);
+    background: rgba(90, 90, 90, 0.5);
     margin: 100px auto;
     padding: 30px;
     width: 80%;
-}
-
-.content {
-    padding: 30px;
+    border-radius: 5px;
 }
 
 .login-vk{
