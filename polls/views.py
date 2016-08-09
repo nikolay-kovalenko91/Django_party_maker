@@ -46,46 +46,25 @@ def vk_handler(request):
 def new_poll(request):
     if request.user.is_authenticated():
         if request.method == "POST":
+            form = PollForm(request.POST)
 
-            if 'next_choice' in request.POST:
-
-                if request.POST['next_choice'] == 'Да':
-                    return HttpResponse('yes')
-                    '''
-                    # send_mail('Новый результат голосования', 'Удален старый и получен новый результат голосования!',settings.EMAIL_HOST_USER, [settings.PARTY_MANAGER_EMAIL])
-                    user = request.user
-                    poll = Poll.objects.get(user=user)
-                    return redirect('polls.views.new_poll')
-                    '''
-                elif request.POST['next_choice'] == 'Нет':
-                    return HttpResponse('no')
-                    '''
-                    logout(request)
-                    return render(request, 'polls/vote_end.html')
-                    '''
-                else:
-                    return HttpResponse('next_choice err')
-                    #return redirect('polls.views.new_poll')
+            if form.is_valid():
+                poll = form.save(commit=False)
+                poll.user = request.user
+                poll.save()
+                #send_mail('Новый результат голосования', 'Получен новый результат голосования!', settings.EMAIL_HOST_USER, [settings.PARTY_MANAGER_EMAIL])
+                return render(request, 'polls/vote_end.html', {})
             else:
-                form = PollForm(request.POST)
-
-                if form.is_valid():
-                    poll = form.save(commit=False)
-                    poll.user = request.user
-                    poll.save()
-                    #send_mail('Новый результат голосования', 'Получен новый результат голосования!', settings.EMAIL_HOST_USER, [settings.PARTY_MANAGER_EMAIL])
-                    return redirect('')
-                else:
-                    polls_help_obj = polls_help()
-                    new_poll_params = polls_help_obj.arrange_poll_form(request, form)
-                    return render(request, 'polls/new_poll.html', new_poll_params)
+                polls_help_obj = polls_help()
+                new_poll_params = polls_help_obj.arrange_poll_form(request, form)
+                return render(request, 'polls/new_poll.html', new_poll_params)
         else:
             #find previous
             user = request.user
             polls = Poll.objects.filter(user=user)
 
             if polls:
-                return render(request, 'polls/confirm_change_poll.html', {})
+                return redirect('polls.views.confirm_change_poll')
             else:
                 form = PollForm()
                 polls_help_obj = polls_help()
@@ -94,6 +73,30 @@ def new_poll(request):
 
     else:
         return redirect('polls.views.login_page')
+
+def confirm_change_poll(request):
+    if request.method == "POST":
+        if 'next_choice' in request.POST:
+
+            if request.POST['next_choice'] == 'Да':
+                return HttpResponse('yes')
+                '''
+                # send_mail('Новый результат голосования', 'Удален старый и получен новый результат голосования!',settings.EMAIL_HOST_USER, [settings.PARTY_MANAGER_EMAIL])
+                user = request.user
+                poll = Poll.objects.get(user=user)
+                return redirect('polls.views.new_poll')
+                '''
+            elif request.POST['next_choice'] == 'Нет':
+                return HttpResponse('no')
+                '''
+                logout(request)
+                return render(request, 'polls/vote_end.html')
+                '''
+            else:
+                return HttpResponse('next_choice err')
+                # return redirect('polls.views.new_poll')
+    else:
+        return render(request, 'polls/confirm_change_poll.html', {})
 
 def polls_list(request):
     polls_help_obj = polls_help()
