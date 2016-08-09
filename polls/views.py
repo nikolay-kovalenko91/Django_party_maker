@@ -37,7 +37,7 @@ def new_poll(request):
         #send_mail('New', 'Hey test test', settings.EMAIL_HOST_USER, ['party.maker.adm@yandex.ru'])
         if request.method == "POST":
             form = PollForm(request.POST)
-            if form.is_valid() and:
+            if form.is_valid():
                 poll = form.save(commit=False)
                 poll.user = request.user
                 poll.save()
