@@ -38,16 +38,25 @@ def new_poll(request):
                 # !!! THANK u form
                 return redirect('/')
         else:
-            #find previous!!!!
-            form = PollForm()
+            #find previous
             user = request.user
-            social_user = get_object_or_404(UserSocialProfile, user=user)
-        return render(request, 'polls/new_poll.html', {'form': form, 'social_user': social_user})
+            polls = Poll.objects.filter(user=user)
+            if polls:
+                poll_is_exist = True
+            else:
+                poll_is_exist = False
+            form = PollForm()
+            social_user = get_object_or_404(UserSocialProfile, user=user, title='Такого профиля социальной сети ВКонтакте нет в базе')
+            return render(request, 'polls/new_poll.html', {'form': form, 'social_user': social_user})
     else:
         return redirect('polls.views.login_page')
 
 def polls_list(request):
-    if request.user.is_superuser:
+    manager_social_id = settings.PARTY_MANAGER_VK_SOCIAL_ID
+    user = request.user
+    social_user =  get_object_or_404(UserSocialProfile, user=user, title='Такого профиля социальной сети ВКонтакте нет в базе')
+
+    if social_user.social_id == manager_social_id:
         polls = Poll.objects.order_by('user')
         return render(request, 'polls/polls_list.html', {'polls': polls})
     else:

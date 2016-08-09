@@ -143,3 +143,5 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 VK_CLIENT_ID = '5576969'
 VK_REDIRECT_URL = 'https://infinite-lake-31577.herokuapp.com/vk_auth'
 VK_CLIENT_SECRET = 'rSHEa0jbSZzg1596wgyJ'
+
+PARTY_MANAGER_VK_SOCIAL_ID = '377889109'
