@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>New poll</h1>
+    <h1>Здравствуйте, {{ social_user.social_first_name }}!</h1>
     <form method="POST" class="new-poll-form">
         {% csrf_token %}
         <label for="{{ form.presence.index }}">Вы придете на вечеринку?</label><br/>

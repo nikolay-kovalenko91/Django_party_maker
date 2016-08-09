@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.core.mail import send_mail
 from .forms import PollForm
-from .models import Poll
+from .models import Poll, UserSocialProfile
 
 
 def login_page(request):
@@ -40,7 +40,9 @@ def new_poll(request):
         else:
             #find previous!!!!
             form = PollForm()
-        return render(request, 'polls/new_poll.html', {'form': form})
+            user = request.user
+            social_user = UserSocialProfile.objects.filter(user=user)
+        return render(request, 'polls/new_poll.html', {'form': form, 'social_user': social_user})
     else:
         return redirect('polls.views.login_page')
 
