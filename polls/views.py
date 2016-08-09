@@ -43,10 +43,10 @@ def new_poll(request):
                 # !!! THANK u form
                 return redirect('/')
             else:
-                if 'presence' not in request.POST:
+                if request.POST['presence'] is None:
                     msg = "bn"
                     form.add_error('presence', msg)
-                if 'drink' not in request.POST:
+                if request.POST['drink'] == None:
                     msg = "nbj"
                     form.add_error('drink', msg)
                 polls_help_obj = polls_help()
