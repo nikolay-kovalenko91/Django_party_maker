@@ -2,9 +2,9 @@
 
 {% block content %}
     <h1>Polls Lists</h1>
-    {% for poll in polls %}
-        {{ poll.user }}<br/>
-        {{ poll.drink }}<br/>
-        {{ poll.presence }}<br/>
+    {% for user in users %}
+      {{ user.username }}<br/>
+      {{ user.social_id }}<br/>
+      <img src="" />
     {% endfor %}
 {% endblock %}

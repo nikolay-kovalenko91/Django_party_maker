@@ -5,7 +5,7 @@ from .classes.polls_help import polls_help
 from django.conf import settings
 from django.core.mail import send_mail
 from .forms import PollForm
-from .models import Poll, UserSocialProfile
+from .models import Poll, UserSocialProfile, User
 from django.http import Http404
 
 def login_page(request):
@@ -53,10 +53,10 @@ def new_poll(request):
                 poll_is_exist = False
             form = PollForm()
             try:
-                social_user = UserSocialProfile.objects.get(user=user)
+                vk_social_user = UserSocialProfile.objects.get(user=user)
             except UserSocialProfile.DoesNotExist:
                 raise Http404("Такого профиля социальной сети ВКонтакте нет в базе.")
-            return render(request, 'polls/new_poll.html', {'form': form, 'social_user': social_user})
+            return render(request, 'polls/new_poll.html', {'form': form, 'vk_social_user': vk_social_user})
     else:
         return redirect('polls.views.login_page')
 
@@ -65,6 +65,8 @@ def polls_list(request):
 
     if polls_help_obj.is_party_manager(request):
         polls = Poll.objects.order_by('user')
-        return render(request, 'polls/polls_list.html', {'polls': polls})
+        vk_social_users = UserSocialProfile.objects.order_by('user')
+        users = User.objects.all()
+        return render(request, 'polls/polls_list.html', {'users': users})
     else:
         return redirect('polls.views.new_poll')
