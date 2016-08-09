@@ -12,7 +12,7 @@ class polls_help():
         user = request.user
         try:
             social_user = UserSocialProfile.objects.get(user=user)
-        except UserSocialProfile.DoesNotExist:
+        except:
             raise Http404("Такого профиля социальной сети ВКонтакте нет в базе.")
 
         if social_user.social_id == manager_social_id:
@@ -24,6 +24,6 @@ class polls_help():
         user = request.user
         try:
             vk_social_user = UserSocialProfile.objects.get(user=user)
-        except UserSocialProfile.DoesNotExist:
+        except:
             raise Http404("Такого профиля социальной сети ВКонтакте нет в базе.")
         return {'form': form, 'vk_social_user': vk_social_user}
