@@ -6,7 +6,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 from .forms import PollForm
 from .models import Poll, UserSocialProfile
-
+from django.http import Http404
 
 def login_page(request):
     return render(request, 'auth/login_page.html', {'client_id': settings.VK_CLIENT_ID, 'redirect_url': settings.VK_REDIRECT_URL})
