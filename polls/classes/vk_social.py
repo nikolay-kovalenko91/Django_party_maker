@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.conf import settings
 import requests, time, hashlib, string, random
 from ..models import UserSocialProfile, SocialTypes

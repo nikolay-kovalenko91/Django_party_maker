@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.http import Http404
 from ..models import UserSocialProfile
 from django.conf import settings
