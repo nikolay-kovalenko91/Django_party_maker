@@ -144,4 +144,6 @@ VK_CLIENT_ID = '5576969'
 VK_REDIRECT_URL = 'https://infinite-lake-31577.herokuapp.com/vk_auth'
 VK_CLIENT_SECRET = 'rSHEa0jbSZzg1596wgyJ'
 
+# The app manager/admin settings
 PARTY_MANAGER_VK_SOCIAL_ID = '377889109'
+PARTY_MANAGER_EMAIL = 'party.maker.adm@yandex.ru'

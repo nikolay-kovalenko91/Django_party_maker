@@ -14,6 +14,7 @@ class UserSocialProfile(models.Model):
     social_photo_url = models.CharField(max_length=100, null=True)
 
 class Poll(models.Model):
+    error_css_class = 'error'
     DRINKS = (
         ('v', 'Водка'),
         ('b', 'Пиво'),
