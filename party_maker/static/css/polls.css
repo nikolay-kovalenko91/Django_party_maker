@@ -1,7 +1,10 @@
 * {
     margin: 0;
     padding: 0;
-    background: rgba(100, 0, 0, 0.5);
+}
+
+body {
+    background: rgba(100, 0, 0, 0.1);
 }
 
 .error input, .error select {
