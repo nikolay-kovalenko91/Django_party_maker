@@ -12,9 +12,9 @@
                     <div class="col">
                         <h3>{{ social_profile.social_first_name }} {{ social_profile.social_last_name }}</h3>
                     </div>
-                    <blockquote>{{ poll.get_presence_display }} на вечеринку.
+                    <blockquote>"{{ poll.get_presence_display }} на вечеринку.
                     {% if poll.presence == 't' %}
-                        Предпочту пить <span class="lowercase">{{ poll.get_drink_display }}</span>.</blockquote>
+                        Предпочту пить <span class="lowercase">{{ poll.get_drink_display }}</span>."</blockquote>
                     {% endif %}
                 {% endif %}
             {% endfor %}
