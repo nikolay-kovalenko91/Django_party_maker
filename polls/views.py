@@ -52,7 +52,7 @@ def new_poll(request):
                 poll = form.save(commit=False)
                 poll.user = request.user
                 poll.save()
-                #send_mail('Новый результат голосования', 'Получен новый результат голосования!', settings.EMAIL_HOST_USER, [settings.PARTY_MANAGER_EMAIL])
+                send_mail('Новый результат голосования', 'Получен новый результат голосования!', settings.EMAIL_HOST_USER, [settings.PARTY_MANAGER_EMAIL])
                 return render(request, 'polls/vote_end.html', {})
             else:
                 polls_help_obj = polls_help()
@@ -79,7 +79,7 @@ def confirm_change_poll(request):
         if 'next_choice' in request.POST:
 
             if len(request.POST['next_choice']) == 2:
-                # send_mail('Новый результат голосования', 'Удален старый и получен новый результат голосования!',settings.EMAIL_HOST_USER, [settings.PARTY_MANAGER_EMAIL])
+                send_mail('Новый результат голосования', 'Удален старый и получен новый результат голосования!',settings.EMAIL_HOST_USER, [settings.PARTY_MANAGER_EMAIL])
                 user = request.user
                 poll = Poll.objects.get(user=user)
                 poll.delete()
