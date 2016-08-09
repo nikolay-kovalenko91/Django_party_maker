@@ -4,9 +4,29 @@
 }
 
 body {
-    background: rgba(100, 0, 0, 0.1);
+    background: url("http://www.jukeboxpartyhire.com.au/wp-content/uploads/2013/08/stock1-png.png");
 }
 
 .error input, .error select {
     border: 2px red solid;
 }
+
+.wrapper {
+    background: #5a5a5a;
+    margin: 0 auto;
+    width: 80%;
+    opacity: 0.7;
+    filter: alpha(Opacity=70);
+}
+
+a {
+    border: 1px solid #2e6da4;
+    display: inline-block;
+    padding: 5px 15px;
+    color: #fff;
+    background: #337ab7;
+  }
+a:hover {
+    box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Ð¢ÐµÐ½ÑŒ */
+    background: #2e6da4;
+   }
