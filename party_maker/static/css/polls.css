@@ -59,7 +59,7 @@ a:hover, .submit:hover {
 
 .submit {
 	cursor: pointer;
-    margin: 10px;
+    margin: 10px 0;
 }
 .submit:active {
 	margin-top: 1px;
