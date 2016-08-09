@@ -44,11 +44,11 @@ def new_poll(request):
                 # !!! THANK u form
                 return redirect('/')
             else:
-                if request.POST['presence'] is None:
+                if request.POST['presence'] == '':
                     msg = "bn"
                     form.add_error('presence', msg)
                     return HttpResponse('presence')
-                if request.POST['drink'] == None:
+                if request.POST['drink'] == '':
                     msg = "nbj"
                     form.add_error('drink', msg)
                     return HttpResponse('drink')
