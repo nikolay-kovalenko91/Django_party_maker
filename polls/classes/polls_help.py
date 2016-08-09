@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.http import Http404
-from ..models import UserSocialProfile
+from ..models import UserSocialProfile, Poll
+from ..forms import PollForm
 from django.conf import settings
 from django.http import Http404
 
@@ -15,6 +16,20 @@ class polls_help():
             raise Http404("Такого профиля социальной сети ВКонтакте нет в базе.")
 
         if social_user.social_id == manager_social_id:
-            return True;
+            return True
         else:
-            return None;
+            return None
+
+    def arrange_poll_form(self, request):
+        user = request.user
+        polls = Poll.objects.filter(user=user)
+        if polls:
+            poll_is_exist = True
+        else:
+            poll_is_exist = False
+        form = PollForm()
+        try:
+            vk_social_user = UserSocialProfile.objects.get(user=user)
+        except UserSocialProfile.DoesNotExist:
+            raise Http404("Такого профиля социальной сети ВКонтакте нет в базе.")
+        return {'form': form, 'vk_social_user': vk_social_user}

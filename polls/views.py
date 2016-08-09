@@ -37,26 +37,27 @@ def new_poll(request):
         #send_mail('New', 'Hey test test', settings.EMAIL_HOST_USER, ['party.maker.adm@yandex.ru'])
         if request.method == "POST":
             form = PollForm(request.POST)
-            if form.is_valid():
+            if form.is_valid() and:
                 poll = form.save(commit=False)
                 poll.user = request.user
                 poll.save()
                 # !!! THANK u form
                 return redirect('/')
+            else:
+                if 'presence' not in request.POST:
+                    msg = ""
+                    form.add_error('presence', msg)
+                if 'drink' not in request.POST:
+                    msg = ""
+                    form.add_error('drink', msg)
+                polls_help_obj = polls_help();
+                new_poll_params = polls_help_obj.arrange_poll_form(request)
+                return render(request, 'polls/new_poll.html', new_poll_params)
         else:
             #find previous
-            user = request.user
-            polls = Poll.objects.filter(user=user)
-            if polls:
-                poll_is_exist = True
-            else:
-                poll_is_exist = False
-            form = PollForm()
-            try:
-                vk_social_user = UserSocialProfile.objects.get(user=user)
-            except UserSocialProfile.DoesNotExist:
-                raise Http404("Такого профиля социальной сети ВКонтакте нет в базе.")
-            return render(request, 'polls/new_poll.html', {'form': form, 'vk_social_user': vk_social_user})
+            polls_help_obj = polls_help();
+            new_poll_params = polls_help_obj.arrange_poll_form(request)
+            return render(request, 'polls/new_poll.html', new_poll_params)
     else:
         return redirect('polls.views.login_page')
 
