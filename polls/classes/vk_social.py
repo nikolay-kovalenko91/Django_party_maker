@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login
 
 class vk_social():
-    '''For the social network'''
+    '''Class for work with the social network'''
     def __init__(self, vk_auth_code):
         # VK authentication step #4
         vk_auth_post_data = {'client_id': settings.VK_CLIENT_ID, 'redirect_uri': settings.VK_REDIRECT_URL,
@@ -20,6 +20,7 @@ class vk_social():
             self.vk_auth_json = None
 
     def register_and_login_user(self, request):
+        '''Register and login the user'''
         if self.vk_auth_json:
             user_request_post_data = {'user_ids': self.vk_auth_json['user_id'], 'fields': 'photo_100'}
             vk_user_obj = requests.post('https://api.vk.com/method/users.get', data=user_request_post_data)
@@ -37,6 +38,7 @@ class vk_social():
 
             vk_social_type = SocialTypes.objects.get(name='vk.com')
 
+            # check previous registration
             try:
                 existing_profile = UserSocialProfile.objects.filter(social_type=vk_social_type,
                                                                     social_id=vk_user_json['uid'])

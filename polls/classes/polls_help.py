@@ -8,8 +8,10 @@ from django.http import Http404
 class polls_help():
 
     def is_party_manager(self, request):
+        '''To find out if user manager of the app or not'''
         manager_social_id = settings.PARTY_MANAGER_VK_SOCIAL_ID
         user = request.user
+        # find the profile
         try:
             social_user = UserSocialProfile.objects.get(user=user)
         except:
@@ -21,6 +23,7 @@ class polls_help():
             return None
 
     def arrange_poll_form(self, request, form):
+        '''To arrange params for the poll form'''
         user = request.user
         try:
             vk_social_user = UserSocialProfile.objects.get(user=user)
