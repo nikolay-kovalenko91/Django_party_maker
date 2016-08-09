@@ -4,11 +4,12 @@
 }
 
 body {
-    background: url("http://www.jukeboxpartyhire.com.au/wp-content/uploads/2013/08/stock1-png.png") no-repeat;
+    background: url("http://www.greethamvalley.co.uk/app/uploads/2013/05/wedding-party.png") no-repeat;
     -moz-background-size: 100%;
     -webkit-background-size: 100%;
     -o-background-size: 100%;
     background-size: 100%;
+    font: 100%/1.5em "Myriad Pro", "PT Sans", Verdana, Arial, sans-serif;
 }
 
 .error input, .error select {
