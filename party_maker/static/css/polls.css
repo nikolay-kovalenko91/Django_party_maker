@@ -34,7 +34,7 @@ h3 {
 }
 
 .wrapper {
-    background: rgba(90, 90, 90, 0.5);
+    background: rgba(90, 90, 90, 0.6);
     margin: 100px auto;
     padding: 30px;
     width: 80%;
@@ -56,3 +56,23 @@ a:hover {
     box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Ð¢ÐµÐ½ÑŒ */
     background: #2e6da4;
    }
+
+.submit {
+	cursor: pointer;
+	border: 1px solid #cecece;
+    display: inline-block;
+    padding: 5px 15px;
+    color: #fff;
+    background: #337ab7;
+	border-radius: 8px;
+	width: 120px;
+}
+.submit:hover {
+	box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Ð¢ÐµÐ½ÑŒ */
+    background: #2e6da4;
+}
+.submit:active {
+	margin-top: 1px;
+	margin-bottom: -1px;
+	zoom: 1;
+}
