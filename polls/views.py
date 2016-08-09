@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render, redirect
 from .classes.vk_social import vk_social
-from django.http import Http404
+from .classes.polls_help import polls_help
 from django.conf import settings
 from django.core.mail import send_mail
 from .forms import PollForm
@@ -20,7 +20,12 @@ def vk_handler(request):
 
         if vk_auth_result:
             # !!!!!!!!!
-            return redirect('polls.views.new_poll')
+            polls_help_obj = polls_help();
+
+            if polls_help_obj.is_party_manager(request):
+                return redirect('polls.views.polls_list')
+            else:
+                return redirect('polls.views.new_poll')
         else:
             # auth error !!!!
             return redirect('polls.views.login_page')
@@ -56,14 +61,9 @@ def new_poll(request):
         return redirect('polls.views.login_page')
 
 def polls_list(request):
-    manager_social_id = settings.PARTY_MANAGER_VK_SOCIAL_ID
-    user = request.user
-    try:
-        social_user = UserSocialProfile.objects.get(user=user)
-    except UserSocialProfile.DoesNotExist:
-        raise Http404("Такого профиля социальной сети ВКонтакте нет в базе.")
+    polls_help_obj = polls_help();
 
-    if social_user.social_id == manager_social_id:
+    if polls_help_obj.is_party_manager(request):
         polls = Poll.objects.order_by('user')
         return render(request, 'polls/polls_list.html', {'polls': polls})
     else:
