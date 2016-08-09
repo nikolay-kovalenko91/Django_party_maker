@@ -72,3 +72,19 @@ a:hover, .submit:hover {
 .form {
     margin-top: 30px;
 }
+
+.lowercase {
+    text-transform: lowercase;
+}
+
+.col {
+    display: block;
+    float: left;
+    margin-right: 20px;
+}
+
+blockquote {
+    margin-left: 100px;
+    border-left: 4px solid #777777;
+    clear: both;
+}
