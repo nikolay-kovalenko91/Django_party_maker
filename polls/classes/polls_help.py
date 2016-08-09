@@ -2,7 +2,7 @@
 from django.http import Http404
 from ..models import UserSocialProfile
 from django.conf import settings
-
+from django.http import Http404
 
 class polls_help():
 
