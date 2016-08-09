@@ -21,10 +21,12 @@
   </head>
 
   <body>
+    <div class="wrapper">
 
         {% block content %}{% endblock %}
         {% if user.is_authenticated %}
         {% endif %}
 
+    </div>
   </body>
 </html>

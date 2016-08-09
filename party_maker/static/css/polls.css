@@ -4,7 +4,11 @@
 }
 
 body {
-    background: url("http://www.jukeboxpartyhire.com.au/wp-content/uploads/2013/08/stock1-png.png");
+    background: url("http://www.jukeboxpartyhire.com.au/wp-content/uploads/2013/08/stock1-png.png") no-repeat;
+    -moz-background-size: 100%;
+    -webkit-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
 }
 
 .error input, .error select {
