@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>Ранее вы уже голосовали, удалить старый ответ и голосовать заново?</h1>
-     <form method="POST" class="new-poll-form">
+     <form method="POST" class="next_choice-form">
         {% csrf_token %}
         <input type="submit" name="next_choice" value="Да">
         <input type="submit" name="next_choice" value="Нет">
