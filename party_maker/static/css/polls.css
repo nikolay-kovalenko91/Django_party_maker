@@ -82,11 +82,12 @@ a:hover, .submit:hover {
     float: left;
     margin-right: 20px;
     margin-top: 30px;
+    margin-bottom: 10px;
 }
 
 blockquote {
     margin-left: 100px;
     border-left: 4px solid #ffefef;
-    padding: 20px;
+    padding: 10px 20px;
     clear: both;
 }
