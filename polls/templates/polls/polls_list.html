@@ -3,10 +3,11 @@
 {% block content %}
     <h1>Polls Lists</h1>
     {% for user in users %}
-        {{ user.username }}<br/>
         {% for param in user.usersocialprofile_set.all %}
-           {{ param.social_id }} param <br/>
+            {% if param.social_id %}
+                <img src="{{ param.social_photo_url }}" />
+                {{ param.social_first_name }} {{ param.social_last_name }}
+                <br/>
         {% endfor %}
-      <img src="" />
     {% endfor %}
 {% endblock %}
