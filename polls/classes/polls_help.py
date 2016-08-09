@@ -22,11 +22,6 @@ class polls_help():
 
     def arrange_poll_form(self, request, form):
         user = request.user
-        polls = Poll.objects.filter(user=user)
-        if polls:
-            poll_is_exist = True
-        else:
-            poll_is_exist = False
         try:
             vk_social_user = UserSocialProfile.objects.get(user=user)
         except UserSocialProfile.DoesNotExist:

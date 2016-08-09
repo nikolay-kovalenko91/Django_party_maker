@@ -147,3 +147,10 @@ VK_CLIENT_SECRET = 'rSHEa0jbSZzg1596wgyJ'
 # The app manager/admin settings
 PARTY_MANAGER_VK_SOCIAL_ID = '377889109'
 PARTY_MANAGER_EMAIL = 'party.maker.adm@yandex.ru'
+
+# Email sender settings
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = "party-maker-poll@yandex.ru"
+EMAIL_HOST_PASSWORD = "test12345"
+EMAIL_USE_SSL = True

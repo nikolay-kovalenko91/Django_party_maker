@@ -6,4 +6,5 @@ urlpatterns = [
     url(r'^vk', views.vk_handler, name='vk_handler'),
     url(r'^new_poll', views.new_poll, name='new_poll'),
     url(r'^polls_list', views.polls_list, name='polls_list'),
+    url(r'^vote_end', views.vote_end, name='vote_end'),
 ]
