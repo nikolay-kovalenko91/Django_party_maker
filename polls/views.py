@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from .classes.vk_social import vk_social
-from django.http import HttpResponse
+from django.http import Http404
 from django.conf import settings
 from django.core.mail import send_mail
 from .forms import PollForm
@@ -47,7 +47,10 @@ def new_poll(request):
             else:
                 poll_is_exist = False
             form = PollForm()
-            social_user = get_object_or_404(UserSocialProfile, user=user, title='Такого профиля социальной сети ВКонтакте нет в базе')
+            try:
+                social_user = UserSocialProfile.objects.get(user=user)
+            except UserSocialProfile.DoesNotExist:
+                raise Http404("Такого профиля социальной сети ВКонтакте нет в базе.")
             return render(request, 'polls/new_poll.html', {'form': form, 'social_user': social_user})
     else:
         return redirect('polls.views.login_page')
@@ -55,7 +58,10 @@ def new_poll(request):
 def polls_list(request):
     manager_social_id = settings.PARTY_MANAGER_VK_SOCIAL_ID
     user = request.user
-    social_user =  get_object_or_404(UserSocialProfile, user=user, title='Такого профиля социальной сети ВКонтакте нет в базе')
+    try:
+        social_user = UserSocialProfile.objects.get(user=user)
+    except UserSocialProfile.DoesNotExist:
+        raise Http404("Такого профиля социальной сети ВКонтакте нет в базе.")
 
     if social_user.social_id == manager_social_id:
         polls = Poll.objects.order_by('user')
