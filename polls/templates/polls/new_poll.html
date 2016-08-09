@@ -4,10 +4,14 @@
     <h1>Здравствуйте, {{ vk_social_user.social_first_name }}!</h1>
     <form method="POST" class="new-poll-form">
         {% csrf_token %}
-        <label for="{{ form.presence.index }}">Вы придете на вечеринку?</label><br/>
-        {{ form.presence }}<br/>
-         <label for="{{ form.drink.index }}">Выберете напиток, который бы вы предпочли:</label><br/>
-        {{ form.drink }}<br/>
+        <label for="{{ form.presence.index }}">Вы придете на вечеринку?</label>
+        <div {% if form.presence.errors %}class="error"{% endif %}>
+        {{ form.presence }}
+        </div>
+        <label for="{{ form.drink.index }}">Выберете напиток, который бы вы предпочли:</label>
+        <div {% if form.drink.errors %}class="error"{% endif %}>
+        {{ form.drink }}
+        </div>
         <button type="submit" class="save btn btn-default">Отправить ответ</button>
     </form>
 {% endblock %}

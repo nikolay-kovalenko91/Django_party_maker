@@ -44,12 +44,13 @@ def new_poll(request):
                 # !!! THANK u form
                 return redirect('/')
             else:
+                '''
                 if request.POST['presence'] == '':
                     msg = "bn"
                     form.add_error('presence', msg)
                 if request.POST['drink'] == '':
                     msg = "nbj"
-                    form.add_error('drink', msg)
+                    form.add_error('drink', msg)'''
                 polls_help_obj = polls_help()
                 new_poll_params = polls_help_obj.arrange_poll_form(request, form)
                 return render(request, 'polls/new_poll.html', new_poll_params)
