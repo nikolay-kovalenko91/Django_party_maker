@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Polls Lists</h1>
     {% for user in users %}
-      {{ user.usersocialprofile_set.all() }} usersocialprofile_set<br/>
+      {{ user.usersocialprofile_set.all }} usersocialprofile_set<br/>
       <img src="" />
     {% endfor %}
 {% endblock %}
