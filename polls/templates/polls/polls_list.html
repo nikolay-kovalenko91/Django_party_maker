@@ -1,14 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Polls Lists</h1>
+    <h1>Ответы</h1>
     {% for user in users %}
-        {% for param in user.usersocialprofile_set.all %}
-            {% if param.social_id %}
-                <img src="{{ param.social_photo_url }}" />
-                {{ param.social_first_name }} {{ param.social_last_name }}
-                <br/>
-            {% endif %}
+        {% for social_profile in user.usersocialprofile_set.all %}
+            {% for poll in user.poll_set.all %}
+                {% if social_profile.social_id and poll.presence and poll.drink %}
+                    <img src="{{ social_profile.social_photo_url }}" />
+                    <h3>{{ social_profile.social_first_name }} {{ social_profile.social_last_name }}</h3>
+                    <br/>
+                    <blockquote>{{ poll.presence }} на вечеринку. Предпочту пить <span class="lowercase">{{ poll.drink }}</span>.</blockquote>
+                {% endif %}
+            {% endfor %}
         {% endfor %}
     {% endfor %}
 {% endblock %}
