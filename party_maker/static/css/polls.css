@@ -30,7 +30,7 @@ h3 {
 }
 
 .error input, .error select {
-    border: 2px red solid;
+    border: 3px red solid;
 }
 
 .wrapper {
