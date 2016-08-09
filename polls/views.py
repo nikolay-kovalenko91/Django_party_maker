@@ -79,22 +79,16 @@ def confirm_change_poll(request):
         if 'next_choice' in request.POST:
 
             if len(request.POST['next_choice']) == 2:
-                return HttpResponse('yes')
-                '''
                 # send_mail('Новый результат голосования', 'Удален старый и получен новый результат голосования!',settings.EMAIL_HOST_USER, [settings.PARTY_MANAGER_EMAIL])
                 user = request.user
                 poll = Poll.objects.get(user=user)
+                poll.delete()
                 return redirect('polls.views.new_poll')
-                '''
             elif len(request.POST['next_choice']) == 3:
-                return HttpResponse('no')
-                '''
                 logout(request)
                 return render(request, 'polls/vote_end.html')
-                '''
             else:
-                return HttpResponse('next_choice err')
-                # return redirect('polls.views.new_poll')
+                return redirect('polls.views.new_poll')
     else:
         return render(request, 'polls/confirm_change_poll.html', {})
 
