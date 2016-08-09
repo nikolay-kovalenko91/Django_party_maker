@@ -1,0 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    background: rgba(100, 0, 0, 0.5);
+}
+
+.error input, .error select {
+    border: 2px red solid;
+}
