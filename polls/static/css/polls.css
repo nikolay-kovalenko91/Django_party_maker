@@ -5,5 +5,17 @@
 }
 
 .error input, .error select {
-    border: 2px red solid;
+    border: 1px red solid;
 }
+
+a {
+    border: 1px solid #2e6da4;
+    display: inline-block;
+    padding: 5px 15px;
+    color: #fff;
+    background: #337ab7;
+  }
+a:hover {
+    box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Тень */
+    background: #2e6da4;
+   }
